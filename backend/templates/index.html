@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Workout Log</title>
+  <script src="https://unpkg.com/htmx.org@1.11.1"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <nav>
+    {% if user %}
+      Logged in as {{ user.email }} | <form method="post" action="/logout" style="display:inline"><button>Logout</button></form>
+    {% else %}
+      <a href="/login">Login</a> | <a href="/register">Register</a>
+    {% endif %}
+  </nav>
+  <main>
+    <h1>FitLog</h1>
+    {% if user %}
+      <section>
+        <h2>Add Workout</h2>
+        <!-- <form hx-post="/workouts" hx-target="#workouts" hx-swap="beforeend"> -->
+          <form action="/workouts" method="post">
+            <input type="date" min="2018-01-01" name="date" required>
+            <input type="text" name="activity" placeholder="Activity" required>
+            <input type="number" name="duration_minutes" placeholder="Minutes" required>
+            <input type="text" name="notes" placeholder="Notes">
+            <button type="submit">Add</button>
+        </form>
+      </section>
+      <section>
+        <h2>Your Workouts</h2>
+        <ul id="workouts">
+          {% for w in workouts %}
+            {% include "_workout_item.html" %}
+          {% endfor %}
+        </ul>
+      </section>
+    {% else %}
+      <p>Please login to track workouts.</p>
+    {% endif %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<li id="w-{{ w.id }}">
+  <strong>{{ w.date }}</strong> — {{ w.activity }} ({{ w.duration_minutes }} min)
+  {% if w.notes %} — {{ w.notes }}{% endif %}
+  <!-- <form hx-post="/workouts/delete/{{ w.id }}" hx-target="#w-{{ w.id }}" hx-swap="outerHTML" method="post"> -->
+  <form action="/workouts/delete/{{ w.id }}" method="post">
+    <button type="submit">Delete</button>
+  </form>
+</li>
