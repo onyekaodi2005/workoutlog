@@ -15,7 +15,7 @@
     {% endif %}
   </nav>
   <main>
-    <h1>FitLog</h1>
+    <h1>Workout Log</h1>
     {% if user %}
       <section>
         <h2>Add Workout</h2>
@@ -23,7 +23,7 @@
           <form action="/workouts" method="post">
             <input type="date" min="2018-01-01" name="date" required>
             <input type="text" name="activity" placeholder="Activity" required>
-            <input type="number" name="duration_minutes" placeholder="Minutes" required>
+            <input type="number" name="duration_minutes" placeholder="Minutes" min=0 required>
             <input type="text" name="notes" placeholder="Notes">
             <button type="submit">Add</button>
         </form>
